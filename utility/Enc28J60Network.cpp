@@ -24,6 +24,7 @@
 
 #include "Enc28J60Network.h"
 #include "Arduino.h"
+#include <SPI.h>
 
 extern "C" {
 #include <avr/io.h>
@@ -55,13 +56,13 @@ void Enc28J60Network::init(uint8_t* macaddr)
   pinMode(ENC28J60_CONTROL_CS, OUTPUT);
   CSPASSIVE; // ss=0
   //
-  pinMode(SPI_MOSI, OUTPUT);
-  pinMode(SPI_SCK, OUTPUT);
-  pinMode(SPI_MISO, INPUT);
-  pinMode(SPI_SS, OUTPUT);
+  // pinMode(SPI_MOSI, OUTPUT);
+  // pinMode(SPI_SCK, OUTPUT);
+  // pinMode(SPI_MISO, INPUT);
+  // pinMode(SPI_SS, OUTPUT);
 
-  digitalWrite(SPI_MOSI, LOW);
-  digitalWrite(SPI_SCK, LOW);
+  // digitalWrite(SPI_MOSI, LOW);
+  // digitalWrite(SPI_SCK, LOW);
 
   /*DDRB  |= 1<<PB3 | 1<<PB5; // mosi, sck output
   cbi(DDRB,PINB4); // MISO is input
@@ -72,8 +73,13 @@ void Enc28J60Network::init(uint8_t* macaddr)
   //
   // initialize SPI interface
   // master mode and Fosc/2 clock:
-  SPCR = (1<<SPE)|(1<<MSTR);
-  SPSR |= (1<<SPI2X);
+  //SPCR = (1<<SPE)|(1<<MSTR);
+  //SPSR |= (1<<SPI2X);
+
+  SPI.setBitOrder(MSBFIRST);
+  SPI.setDataMode(SPI_MODE0);
+  SPI.setClockDivider(SPI_CLOCK_DIV4);
+
   // perform system reset
   writeOp(ENC28J60_SOFT_RESET, 0, ENC28J60_SOFT_RESET);
   delay(50);
