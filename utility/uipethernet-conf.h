@@ -17,7 +17,7 @@
 
 /* timeout after which UIPClient::connect gives up. The timeout is specified in seconds.
  * if set to a number <= 0 connect will timeout when uIP does (which might be longer than you expect...) */
-#define UIP_CONNECT_TIMEOUT      -1
+#define UIP_CONNECT_TIMEOUT       5
 
 /* periodic timer for uip (in ms) */
 #define UIP_PERIODIC_TIMER       250

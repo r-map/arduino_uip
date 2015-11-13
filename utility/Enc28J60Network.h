@@ -27,7 +27,12 @@
 
 #include "mempool.h"
 
-#define ENC28J60_CONTROL_CS     SS
+// change it according with arduino mega2560 or microduino core+
+// arduino mega2560
+//#define ENC28J60_CONTROL_CS     SS
+// microduino core+
+#define ENC28J60_CONTROL_CS     8
+
 #define SPI_MOSI        MOSI
 #define SPI_MISO        MISO
 #define SPI_SCK         SCK
